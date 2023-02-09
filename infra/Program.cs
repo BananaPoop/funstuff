@@ -22,6 +22,14 @@ return await Pulumi.Deployment.RunAsync(() =>
         Kind = Kind.StorageV2
     });
 
+    var testContainer = new BlobContainer("testContainer", new BlobContainerArgs
+    {
+        AccountName = storageAccount.Name,
+        ResourceGroupName = resourceGroup.Name,
+        PublicAccess = PublicAccess.None,
+        ContainerName = "mycontainer"
+    });
+
     var storageAccountKeys = ListStorageAccountKeys.Invoke(new ListStorageAccountKeysInvokeArgs
     {
         ResourceGroupName = resourceGroup.Name,
