@@ -2,8 +2,4 @@ encryptionsalt: v1:Is/XGwpMM4Q=:v1:a+l+DTiCXTt6sFPi:Ck/ha+ClCDkAykz/pq1hycXX6uzK
 config:
   AzureStorageBackend:funky:
     secure: v1:elAaO5DVUnRBq6Hj:XBFAauHS8YKXZloVBGC43GwT6cQ=
-  AzureStorageBackend:funkysef:
-    secure: v1:qjO4tjh00uI0bWTR:OqCPgGypFrhnAp7JhK2rrGi4xxk=
-  AzureStorageBackend:funkyseseff:
-    secure: v1:7uoGU1JGT6mxjld5:4Cy2so5suqJSUt91SSo1mCYWIiX1pdpB
   azure-native:location: australiaeast
