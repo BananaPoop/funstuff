@@ -8,6 +8,10 @@
 # Install the Azure CLI and the Pulumi CLI before attempting to run this script
 
 # PowerShell variables used in the script 
+
+## (Optional) Set your Azure tenancy (e.g. subscription)
+# az account set --subscription "My Subscription Name"
+
 $random=Get-Random -Maximum 1000
 $location="Australia East"
 $rgName="rg-pulumistate-australiaeast"
