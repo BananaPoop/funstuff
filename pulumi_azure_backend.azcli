@@ -1,0 +1,44 @@
+# This code is only required when setting up a pulumi account for the first time
+# That is when you run `pulumi login`
+# `pulumi login --local` can be used instead of the following to set up a local backend, however that is not recommended for actual production scenarios
+# 
+# The following code is from https://www.techwatching.dev/posts/pulumi-azure-backend/ by https://github.com/TechWatching
+# I'd recommend reading the blog post above to understand what is going on here
+
+# Install the Azure CLI and the Pulumi CLI before attempting to run this script
+
+# PowerShell variables used in the script 
+$random=Get-Random -Maximum 1000
+$location="Australia East"
+$rgName="rg-pulumistate-australiaeast"
+$saName="stiacstate$random" # This has to be globally unique
+$kvName="kv-pulumistate-$random" # This has to be globally unique
+
+az group create -n $rgName -l $location
+
+# Configure the Azure Blob Storage that will contain the state 
+az storage account create -g $rgName -n $saName -l $location --sku Standard_LRS
+# Set environment variables needed to write on the storage account
+$env:AZURE_STORAGE_KEY=$(az storage account keys list -n $saName -g $rgName -o tsv --query '[0].value')
+$env:AZURE_STORAGE_ACCOUNT=$saName
+az storage container create -n iacstate
+
+# Configure the Key Vault that will be used to encrypt the sensitive data
+$vaultId=az keyvault create -g $rgName -n $kvName --enable-rbac-authorization true --query "id"
+$myUserId=az ad signed-in-user show --query "id" -o tsv 
+az role assignment create --scope $vaultId --role "Key Vault Crypto Officer" --assignee $myUserId 
+az keyvault key create -n encryptionState --vault-name $kvName
+# Use az cli to authenticate to key vault instead of using environment variables 
+$env:AZURE_KEYVAULT_AUTH_VIA_CLI="true"
+
+# Indicate pulumi to use the newly created azure blob storage as a backend
+pulumi login azblob://iacstate
+
+### The following set up a template project for pulumi, however this repo already has a modified version of the template project,
+### so do not run the following commands unless you want to start from scratch
+## Create and use a folder to store the infrastructure code
+#mkdir infra;cd infra;
+## Create a new Pulumi project using the azure blob storage as the backend and the keyvault as the encryption provider 
+#pulumi new azure-csharp -n AzureStorageBackend -s dev -y --secrets-provider="azurekeyvault://$kvName.vault.azure.net/keys/encryptionState"
+## Deploy the infrastructure
+#pulumi up -y
