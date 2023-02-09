@@ -18,7 +18,7 @@ jobs:
       - uses: pulumi/actions@v4
         with:
           command: preview
-          stack-name: org-name/stack-name # When using an individual account, only use stack-name.
+          stack-name: dev
           cloud-url: ${{ secrets.PULUMI_CLOUD_URL}}
         env:
           AZURE_STORAGE_ACCOUNT: ${{ secrets.STATE_AZURE_STORAGE_ACCOUNT}}
