@@ -2,6 +2,8 @@ name: Pulumi-Preview
 on:
   - pull_request
   - workflow_dispatch
+permissions:
+  pull-requests: write
 jobs:
   preview:
     name: Preview
