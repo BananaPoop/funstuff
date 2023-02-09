@@ -4,6 +4,7 @@ on:
   - workflow_dispatch
 permissions:
   pull-requests: write
+  contents: write
 jobs:
   preview:
     name: Preview
