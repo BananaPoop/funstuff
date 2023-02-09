@@ -20,3 +20,7 @@ jobs:
           command: preview
           stack-name: org-name/stack-name # When using an individual account, only use stack-name.
           cloud-url: ${{ secrets.PULUMI_CLOUD_URL}}
+        env:
+          AZURE_STORAGE_ACCOUNT: ${{ secrets.STATE_AZURE_STORAGE_ACCOUNT}}
+          AZURE_STORAGE_KEY: ${{ secrets.STATE_AZURE_STORAGE_KEY}}
+          AZURE_KEYVAULT_AUTH_VIA_CLI: true
