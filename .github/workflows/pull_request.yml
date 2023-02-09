@@ -27,3 +27,7 @@ jobs:
           AZURE_STORAGE_KEY: ${{ secrets.STATE_AZURE_STORAGE_KEY}}
           AZURE_KEYVAULT_AUTH_VIA_CLI: false
           PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE}}
+          ARM_CLIENT_ID: ${{ secrets.AZURE_SP_CLIENT_ID}}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_SP_CLIENT_SECRET}}
+          ARM_TENANT_ID: ${{ secrets.AZURE_SP_TENANT_ID}}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
