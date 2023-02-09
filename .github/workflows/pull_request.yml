@@ -20,6 +20,7 @@ jobs:
           command: preview
           stack-name: dev
           cloud-url: ${{ secrets.PULUMI_CLOUD_URL}}
+          work-dir: "./infra"
         env:
           AZURE_STORAGE_ACCOUNT: ${{ secrets.STATE_AZURE_STORAGE_ACCOUNT}}
           AZURE_STORAGE_KEY: ${{ secrets.STATE_AZURE_STORAGE_KEY}}
