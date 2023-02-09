@@ -22,6 +22,7 @@ jobs:
           cloud-url: ${{ secrets.PULUMI_CLOUD_URL}}
           work-dir: "./infra"
           secrets-provider: ${{ secrets.AZURE_KEYVAULT_SECRETS_PROVIDER}}
+          comment-on-pr: true
         env:
           AZURE_STORAGE_ACCOUNT: ${{ secrets.STATE_AZURE_STORAGE_ACCOUNT}}
           AZURE_STORAGE_KEY: ${{ secrets.STATE_AZURE_STORAGE_KEY}}
