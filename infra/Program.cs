@@ -30,11 +30,11 @@ return await Pulumi.Deployment.RunAsync(() =>
         ContainerName = "mycontainer"
     });
 
-    // var storageAccountKeys = AzureNative.Storage.ListStorageAccountKeys.Invoke(new AzureNative.Storage.ListStorageAccountKeysInvokeArgs
-    // {
-    //     ResourceGroupName = resourceGroup.Name,
-    //     AccountName = storageAccount.Name
-    // });
+    var storageAccountKeys = AzureNative.Storage.ListStorageAccountKeys.Invoke(new AzureNative.Storage.ListStorageAccountKeysInvokeArgs
+    {
+        ResourceGroupName = resourceGroup.Name,
+        AccountName = storageAccount.Name
+    });
 
     // var primaryStorageKey = storageAccountKeys.Apply(accountKeys =>
     // {
@@ -94,6 +94,7 @@ return await Pulumi.Deployment.RunAsync(() =>
         Location = resourceGroup.Location,
     });
 
+
     var functionApp = new AzureNative.Web.WebApp("functionApp", new(){
         ResourceGroupName = resourceGroup.Name,
         ServerFarmId = plan.Id,
@@ -115,6 +116,11 @@ return await Pulumi.Deployment.RunAsync(() =>
                     Name = "WEBSITE_RUN_FROM_PACKAGE",
                     Value = Output.Tuple(storageAccount.Name, appContainer.Name, appBlob.Name, signature).Apply(values =>
                         $"https://{values.Item1}.blob.core.windows.net/{values.Item2}/{values.Item3}?{values.Item4}"),
+                },
+                new (){
+                    Name = "AzureWebJobsStorage",
+                    Value = Output.Tuple(storageAccount.Name, storageAccountKeys).Apply(values =>
+                        $"DefaultEndpointsProtocol=https;AccountName={values.Item1};AccountKey={values.Item2.Keys[0].Value};EndpointSuffix=core.windows.net"),
                 },
             },
             Cors = new AzureNative.Web.Inputs.CorsSettingsArgs(){
