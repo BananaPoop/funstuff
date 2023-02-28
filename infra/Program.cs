@@ -44,7 +44,7 @@ return await Pulumi.Deployment.RunAsync(() =>
 
     //Stuff for Azure Function Serverless App
     const string appPath = "../functionApp";
-    var appContainer = new AzureNative.Storage.BlobContainer("appContainer", new AzureNative.Storage.BlobContainerArgs
+    var appContainer = new AzureNative.Storage.BlobContainer("appcontainer", new AzureNative.Storage.BlobContainerArgs
     {
         AccountName = storageAccount.Name,
         ResourceGroupName = resourceGroup.Name,
