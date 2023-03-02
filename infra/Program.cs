@@ -4,7 +4,7 @@ using AzureNative = Pulumi.AzureNative; //We may support multicloud in the futur
 using System.Collections.Generic;
 using System.IO;
 
-return await Pulumi.Deployment.RunAsync(() =>
+return await Pulumi.Deployment.RunAsync(async () =>
 {
     // Create an Azure Resource Group
     var resourceGroup = new AzureNative.Resources.ResourceGroup("resourceGroup", new(){
@@ -128,6 +128,8 @@ return await Pulumi.Deployment.RunAsync(() =>
             }
         }
     });
+
+    await NextApp.Deploy();
 
     //Provide this to the config for any website that needs to call the api
     // var apiUrl = functionApp.DefaultHostName.Apply(hostname => {
