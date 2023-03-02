@@ -13,25 +13,26 @@
 # az account set --subscription "My Subscription Name"
 
 $random=Get-Random -Maximum 1000
+$random = 988
 $location="Australia East"
 $rgName="rg-pulumistate-australiaeast"
 $saName="stiacstate$random" # This has to be globally unique
 $kvName="kv-pulumistate-$random" # This has to be globally unique
 
-az group create -n $rgName -l $location
+#az group create -n $rgName -l $location
 
 # Configure the Azure Blob Storage that will contain the state 
-az storage account create -g $rgName -n $saName -l $location --sku Standard_LRS
+#az storage account create -g $rgName -n $saName -l $location --sku Standard_LRS
 # Set environment variables needed to write on the storage account
 $env:AZURE_STORAGE_KEY=$(az storage account keys list -n $saName -g $rgName -o tsv --query '[0].value')
 $env:AZURE_STORAGE_ACCOUNT=$saName
-az storage container create -n iacstate
+#az storage container create -n iacstate
 
 # Configure the Key Vault that will be used to encrypt the sensitive data
-$vaultId=az keyvault create -g $rgName -n $kvName --enable-rbac-authorization true --query "id"
-$myUserId=az ad signed-in-user show --query "id" -o tsv 
-az role assignment create --scope $vaultId --role "Key Vault Crypto Officer" --assignee $myUserId 
-az keyvault key create -n encryptionState --vault-name $kvName
+#$vaultId=az keyvault create -g $rgName -n $kvName --enable-rbac-authorization true --query "id"
+#$myUserId=az ad signed-in-user show --query "id" -o tsv 
+#az role assignment create --scope $vaultId --role "Key Vault Crypto Officer" --assignee $myUserId 
+#az keyvault key create -n encryptionState --vault-name $kvName
 # Use az cli to authenticate to key vault instead of using environment variables 
 $env:AZURE_KEYVAULT_AUTH_VIA_CLI="true"
 
