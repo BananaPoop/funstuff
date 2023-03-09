@@ -1,5 +1,0 @@
-encryptionsalt: v1:Is/XGwpMM4Q=:v1:a+l+DTiCXTt6sFPi:Ck/ha+ClCDkAykz/pq1hycXX6uzKjQ==
-config:
-  AzureStorageBackend:funky:
-    secure: v1:elAaO5DVUnRBq6Hj:XBFAauHS8YKXZloVBGC43GwT6cQ=
-  azure-native:location: australiaeast
