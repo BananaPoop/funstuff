@@ -1,2 +1,3 @@
 # Just to store any secrets that are used in peoples local dev environments
 *.secret 
+leptos-web/.gitignore
