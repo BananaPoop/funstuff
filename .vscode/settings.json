@@ -5,7 +5,13 @@
     "debug.internalConsoleOptions": "neverOpen",
     "azureFunctions.preDeployTask": "publish (functions)",
     "cSpell.words": [
+        "actix",
+        "bindgen",
         "Canonicalized",
-        "Pulumi"
+        "leptos",
+        "Pulumi",
+        "rustup",
+        "stylesheet",
+        "tailwindcss"
     ]
 }

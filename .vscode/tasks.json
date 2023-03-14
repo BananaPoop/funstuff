@@ -2,6 +2,48 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "Leptos Watch",
+			"dependsOrder": "parallel",
+			"dependsOn": [
+				"LeptosWeb Cargo Watch",
+				"LeptosWeb Tailwind Watch"
+			],
+		},
+		{
+			"label" : "LeptosWeb Cargo Watch",
+			"type" : "shell",
+			"command": "cargo",
+			"args":[
+				"leptos",
+				"watch"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/leptos-web"
+			},
+			"isBackground": true,
+			"icon": {
+				"id": "eye-watch"
+			}
+		},
+		{
+			"label" : "LeptosWeb Tailwind Watch",
+			"type" : "shell",
+			"command": "npx",
+			"args":[
+				"tailwindcss",
+				"-i", ".\\tailwind_input.css",
+				"-o", ".\\style\\tailwind.css",
+				"--watch"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/leptos-web"
+			},
+			"isBackground": true,
+			"icon": {
+				"id": "eye-watch"
+			}
+		},
+		{
 			"label": "clean (functions)",
 			"command": "dotnet",
 			"args": [

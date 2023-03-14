@@ -2,6 +2,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Leptos", //See leptos-web/README.md
+            "type": "msedge",
+            "request": "launch", // Is there useful debugging to be grabbed here?
+            "url":"http://localhost:3000",
+            "runtimeArgs": ["--headless"]
+            //"preLaunchTask": "Leptos Watch"
+        },
+        {
             "name": "Attach to .NET Functions",
             "type": "coreclr",
             "request": "attach",
